@@ -20,6 +20,8 @@ namespace DatabaseFirstLINQ
             //ProblemTwo();
             ProblemThree();
             //ProblemFour();
+            //ProblemThree();
+            ProblemFour();
             //ProblemFive();
             //ProblemSix();
             //ProblemSeven();
@@ -70,13 +72,30 @@ namespace DatabaseFirstLINQ
                 Console.WriteLine(product.Name + " " + product.Price);
             }
 
+            //var users = _context.Users;
+            //Console.WriteLine(users.ToList().Count);
+
         }
+
 
         private void ProblemFour()
         {
             // Write a LINQ query that gets each product that contains an "s" in the products name.
             // Then print the name of each product from the above query to the console.
+            var products = _context.Products;
+            List<string> productNames = new List<string>();
 
+            foreach (Product product in products)
+            {
+                productNames.Add(product.Name);
+            }
+
+            IEnumerable<string> StringQuery = productNames.Where(names => names.Contains('s'));
+
+            foreach (string name in StringQuery)
+            {
+                Console.WriteLine(name);
+            }
         }
 
         private void ProblemFive()
@@ -246,6 +265,7 @@ namespace DatabaseFirstLINQ
 
         // BIG ONE
         private void BonusThree()
+
         {
             // 1. Create functionality for a user to sign in via the console
             // 2. If the user succesfully signs in
@@ -259,6 +279,5 @@ namespace DatabaseFirstLINQ
             // b. Re-prompt the user for credentials
 
         }
-
     }
 }
