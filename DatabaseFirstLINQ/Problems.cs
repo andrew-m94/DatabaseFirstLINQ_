@@ -18,6 +18,8 @@ namespace DatabaseFirstLINQ
         {
             //ProblemOne();
             //ProblemTwo();
+            ProblemThree();
+            //ProblemFour();
             //ProblemThree();
             //ProblemFour();
             ProblemFive();
@@ -43,10 +45,8 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that returns the number of users in the Users table.
             // HINT: .ToList().Count
-
             var users = _context.Users;
             Console.WriteLine(users.ToList().Count);
-
         }
 
         private void ProblemTwo()
@@ -65,23 +65,38 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that gets each product where the products price is greater than $150.
             // Then print the name and price of each product from the above query to the console.
+            var products = _context.Products;
+            var productsGreater = products.Where(p => p.Price > 150);
+            foreach (Product product in productsGreater)
+            {
+                Console.WriteLine(product.Name + " " + product.Price);
+            }
 
-            var products = _context.Products;            var productsGreater = products.Where(p => p.Price > 150);            foreach (Product product in productsGreater)            {                Console.WriteLine(product.Name + " " + product.Price);            }
+            //var users = _context.Users;
+            //Console.WriteLine(users.ToList().Count);
 
         }
+
 
         private void ProblemFour()
         {
             // Write a LINQ query that gets each product that contains an "s" in the products name.
             // Then print the name of each product from the above query to the console.
-            var products = _context.Products;            List<string> productNames = new List<string>();            foreach (Product product in products)
+            var products = _context.Products;
+            List<string> productNames = new List<string>();
+
+            foreach (Product product in products)
             {
                 productNames.Add(product.Name);
-            }            IEnumerable<string> StringQuery = productNames.Where(names => names.Contains('s'));
+            }
 
-            foreach (string name in StringQuery)            {                Console.WriteLine(name);            }
+            IEnumerable<string> StringQuery = productNames.Where(names => names.Contains('s'));
+
+            foreach (string name in StringQuery)
+            {
+                Console.WriteLine(name);
+            }
         }
-
 
         private void ProblemFive()
         {
@@ -260,6 +275,7 @@ namespace DatabaseFirstLINQ
 
         // BIG ONE
         private void BonusThree()
+
         {
             // 1. Create functionality for a user to sign in via the console
             // 2. If the user succesfully signs in
@@ -273,6 +289,5 @@ namespace DatabaseFirstLINQ
             // b. Re-prompt the user for credentials
 
         }
-
     }
 }
