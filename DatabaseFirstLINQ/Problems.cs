@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using DatabaseFirstLINQ.Models;
 
@@ -17,8 +18,8 @@ namespace DatabaseFirstLINQ
         {
             //ProblemOne();
             //ProblemTwo();
-            ProblemThree();
-            //ProblemFour();
+            //ProblemThree();
+            ProblemFour();
             //ProblemFive();
             //ProblemSix();
             //ProblemSeven();
@@ -73,8 +74,14 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that gets each product that contains an "s" in the products name.
             // Then print the name of each product from the above query to the console.
+            var products = _context.Products;            List<string> productNames = new List<string>();            foreach (Product product in products)
+            {
+                productNames.Add(product.Name);
+            }            IEnumerable<string> StringQuery = productNames.Where(names => names.Contains('s'));
 
+            foreach (string name in StringQuery)            {                Console.WriteLine(name);            }
         }
+
 
         private void ProblemFive()
         {
